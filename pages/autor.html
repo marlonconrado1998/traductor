@@ -1,0 +1,31 @@
+<div class="content-wrapper" ng-controller="autorController as autorCtrl">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-success mb-4" ng-click="autorCtrl.modalAddAutor({}, 'Insertar');">
+                        Agregar autor
+                    </button>
+                    <div style="overflow-x: auto;">
+                        <table ng-table="autorCtrl.tableParams" class="table table-condensed table-bordered table-striped">
+                            <tr ng-repeat="row in $data" class="t-hover pointer">
+                                <td data-title="'Identificación'" filter="{id: 'text'}" sortable="'id'" ng-bind="row.id"></td>
+                                <td data-title="'Nombre'" filter="{nombre: 'text'}" sortable="'nombre'" ng-bind="row.nombre"></td>
+                                <td data-title="'Email'" filter="{email: 'text'}" sortable="'email'" ng-bind="row.email"></td>
+                                <td data-title="'Ubicación'" filter="{ubicacion: 'text'}" sortable="'ubicacion'"
+                                    ng-bind="row.ubicacion"></td>
+                                <td data-title="'Abrir'" class="text-center">
+                                    <a href>
+                                        <div class="badge badge-inverse-primary p-2" ng-click="autorCtrl.modalAddAutor(row, 'Actualizar');">
+                                            <i class="mdi mdi-account-multiple"></i>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

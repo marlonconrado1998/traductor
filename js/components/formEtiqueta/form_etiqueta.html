@@ -1,0 +1,133 @@
+<style>
+    .uppercase {
+        text-transform: uppercase;
+    }
+</style>
+
+<form class="container my-3" name="formEtiqueta" ng-submit="$ctrl.onExecute();">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="id">Contenido ES</label>
+                    <strong class="text-danger">*</strong>
+                    <input type="text" placeholder="Ingresar contenido en español" class="form-control uppercase"
+                        ng-model="$ctrl.etiqueta.contenido_es" ng-required="true" ng-disabled="$ctrl.type == 'Actualizar'">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="nombre">Contenido EN</label>
+                    <strong class="text-danger">*</strong>
+                    <input type="text" ng-disabled="!$ctrl.editar" placeholder="Ingresar contenido en inglés" class="form-control uppercase"
+                        ng-model="$ctrl.etiqueta.contenido_en" ng-required="true">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="email">Contenido CR</label>
+                    <strong class="text-danger">*</strong>
+                    <input type="text" ng-disabled="!$ctrl.editar" placeholder="Ingresar contenido en creole" class="form-control uppercase"
+                        ng-model="$ctrl.etiqueta.contenido_cr" ng-required="true">
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="email">Gramática</label>
+                    <strong class="text-danger">*</strong>
+                    <select class="form-control" ng-disabled="!$ctrl.editar" ng-model="$ctrl.etiqueta.gramatica"
+                        multiple ng-options="gram for gram in $ctrl.gramatica track by gram" required></select>
+                    <div class="row mt-2">
+                        <div class="col" ng-repeat="gram in $ctrl.etiqueta.gramatica">
+                            <span class="badge badge-secondary text-dark" ng-bind="gram"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="col-lg-12">
+                <div class="form-group" ng-if="$ctrl.type == 'Actualizar';">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <label>Galería ({{$ctrl.etiqueta.galeria.length}} imágenes)</label>
+                        </div>
+                        <div>
+                            <a href class="badge badge-primary p-2" ng-if="!$ctrl.update_galeria && $ctrl.editar"
+                                ng-click="$ctrl.update_galeria = true;">
+                                Cargar imágenes
+                                <i class="fa fa-upload"></i>
+                            </a>
+                            <a href class="badge badge-primary p-2" ng-if="$ctrl.type == 'Actualizar' && $ctrl.update_galeria;"
+                                ng-click="$ctrl.update_galeria = false;">
+                                <i class="fa fa-arrow-left"></i>
+                                Volver
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-if="!$ctrl.update_galeria;" class="container mt-4" style="max-height: 230px; overflow-y: auto;">
+                        <div class="row d-flex justify-content-center">
+                            <div ng-repeat="image in $ctrl.etiqueta.galeria track by image.path" ng-init="loader.bool = false;"
+                                class="col-lg-6">
+                                <div class="pt-1 px-1 text-center" style="background-color: black; margin: 2px;">
+                                    <img ngf-src="$ctrl.url+'/'+image.path" class="img-fluid">
+                                    <p class="text-light" ng-bind="image.author"></p>
+                                </div>
+                                <div ng-if="$ctrl.editar" class="overDelete">
+                                    <a href class="badge badge-danger" ng-click="$ctrl.deleteImage(image.path, loader);">
+                                        <i class="fa fa-trash fa-lg"></i>
+                                    </a>
+                                </div>
+                                <div ng-if="loader.bool">
+                                    <loader></loader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="$ctrl.update_galeria || $ctrl.type == 'Insertar';">
+                    <div ngf-drop="$ctrl.load();" ngf-select="$ctrl.load();" ng-model="$ctrl.galeria" name="file"
+                        ngf-pattern="'image/*'" ngf-accept="'image/*'" class="alert-secondary p-3" ngf-multiple="true"
+                        style="cursor: pointer;">
+                        <p class="text-center h6">
+                            Arrastra o presiona aquí para cargar imágenes <br>
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <a href="" class="h6" ng-click="$ctrl.vaciarGaleria();">
+                            Vaciar galería
+                        </a>
+                    </div>
+                    <!-- <div class="text-right"></div> -->
+                    <div class="container mt-2" style="max-height: 250px; overflow-y: auto;">
+                        <div class="row d-flex justify-content-center">
+                            <div ng-repeat="image in $ctrl.galeria_selected track by image.name" class="col-lg-6">
+                                <div class="row" style="background-color: black; margin: 2px;">
+                                    <div class="col-12 pt-2 px-2 text-center">
+                                        <img ngf-src="image" class="img-fluid">
+                                    </div>
+                                    <div class="col-12 px-2">
+                                        <input type="text" ng-model="image.author" class="form-control" placeholder="Nombre de autor">
+                                    </div>
+                                </div>
+                                <div class="overDelete">
+                                    <a href class="badge badge-danger" ng-click="$ctrl.galeria_selected.splice($index, 1);">
+                                        <i class="fa fa-trash fa-lg"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12 justify-content-center" title="Todos los campos son requeridos">
+        <button type="submit" class="btn btn-success mt-3" ng-disabled="!formEtiqueta.$valid || !$ctrl.editar">
+            Guardar cambios
+        </button>
+    </div>
+</form>
+<div ng-if="$ctrl.loader;">
+    <loader></loader>
+</div>

@@ -1,0 +1,47 @@
+<form class="container my-3" name="formAutor" ng-submit="$ctrl.onExecute();">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="identificacion">
+                    Identificación
+                </label>
+                <strong class="text-danger">*</strong>
+                <input type="text" name="identificacion" placeholder="Ingresar identificación" class="form-control" ng-model="$ctrl.autor.id"
+                    required ng-disabled="$ctrl.type == 'Actualizar'">
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <strong class="text-danger">*</strong>
+                <input type="text" ng-disabled="!$ctrl.editar" placeholder="Ingresar nombre" class="form-control"
+                    ng-model="$ctrl.autor.nombre" ng-required="true">
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <strong class="text-danger">*</strong>
+                <input type="email" ng-disabled="!$ctrl.editar" placeholder="Ingresar email" class="form-control"
+                    ng-model="$ctrl.autor.email" ng-required="true">
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <strong class="text-danger">*</strong>
+                <input type="text" ng-disabled="!$ctrl.editar" placeholder="Ingresar dirección" class="form-control"
+                    ng-model="$ctrl.autor.ubicacion" ng-required="true">
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12 justify-content-center" title="Todos los campos son requeridos">
+        <button type="submit" class="btn btn-outline-success mt-3" ng-disabled="!formAutor.$valid || !$ctrl.editar">
+            <i class="fa fa-save"></i> Guardar cambios
+        </button>
+    </div>
+</form>
+
+<div ng-if="$ctrl.loader">
+    <loader></loader>
+</div>

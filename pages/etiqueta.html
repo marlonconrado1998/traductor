@@ -1,0 +1,32 @@
+<div class="content-wrapper" ng-controller="etiquetaController as etiquetaCtrl">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <button class="btn btn-success mb-4" ng-click="etiquetaCtrl.modalAddEtiqueta({}, 'Insertar');">
+                        Agregar etiqueta
+                    </button>
+                    <div style="overflow-x: auto;">
+                        <table ng-table="etiquetaCtrl.tableParams" class="table table-condensed table-bordered table-striped">
+                            <tr ng-repeat="row in $data" class="t-hover pointer">
+                                <td data-title="'Contenido español'" filter="{contenido_es: 'text'}" sortable="'contenido_es'"
+                                    ng-bind="row.contenido_es"></td>
+                                <td data-title="'Contenido inglés'" filter="{contenido_en: 'text'}" sortable="'contenido_en'"
+                                    ng-bind="row.contenido_en"></td>
+                                <td data-title="'Contenido creole'" filter="{contenido_cr: 'text'}" sortable="'contenido_cr'"
+                                    ng-bind="row.contenido_cr"></td>
+                                <td data-title="'Abrir'" class="text-center">
+                                    <a href>
+                                        <div class="badge badge-inverse-primary p-2" ng-click="etiquetaCtrl.modalAddEtiqueta(row, 'Actualizar');">
+                                            <i class="mdi mdi-tag"></i>
+                                        </div>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

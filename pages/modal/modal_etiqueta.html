@@ -1,0 +1,17 @@
+<div class="modal-header">
+    <h5>{{$ctrl.type}} etiqueta</h5>
+    <span class="switch" ng-if="$ctrl.type=='Actualizar'">
+        <input type="checkbox" class="switch" ng-model="$ctrl.editar" id="switch-id">
+        <label for="switch-id"></label>
+    </span>
+</div>
+<div class="modal-body bg-white">
+    <div class="container">
+        <form-etiqueta type="{{$ctrl.type}}" editar="$ctrl.editar" etiqueta="$ctrl.etiqueta" callback="$ctrl.callback"></form-etiqueta>
+        <div class="row col-md-12 justify-content-center">
+            <button type="button" class="btn btn-outline-danger" ng-click="$ctrl.cerrar();">
+                Cancelar
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,155 @@
+<div class="modal-header">
+    <h5>Nuevo artículo</h5>
+    <a href class="text-gray" ng-click="$ctrl.cerrar()">
+        <span>
+            <i class="fa fa-times"></i>
+        </span>
+    </a>
+</div>
+<div class="modal-body bg-white">
+    <div class="container">
+        <div ng-if="$ctrl.loader == true;">
+            <loader></loader>
+        </div>
+        <wizard ng-show="$ctrl.form_autor != true && $ctrl.form_etiqueta != true" current-step-number="currentStepNumber"
+            submit="$ctrl.executeQuery();">
+            <wizard-step title="Audio" entered="stepEntered()">
+                <div class="container">
+                    <h4 class="text-center alert-secondary p-3">AUDIO</h4>
+                    <div ng-show="!$ctrl.audio" ngf-drop="$ctrl.addAudio(this, $ctrl.audio);" ngf-select="$ctrl.addAudio(this, $ctrl.audio);"
+                        ng-model="$ctrl.audio" name="file" ngf-pattern="'audio/*'" ngf-accept="'audio/*'" ngf-multiple="false"
+                        ngf-max-files="1" class="border uploadArticle" style="padding: 30px;" ngf-max-duration="'20s'"
+                        ngf-min-duration="'5s'" ngf-duration="$ctrl.validarDuracion($duration)" required>
+                        <div class="mb-2 d-flex justify-content-center align-items-center">
+                            <i class="fa fa-upload fa-3x text-default"></i>
+                        </div>
+                        <h5 class="text-center">
+                            Carga o arrastra tu audio aquí
+                        </h5>
+                    </div>
+                    <div ng-show="$ctrl.audio && $ctrl.type =='Insertar'">
+                        <div style="word-wrap: break-word;">
+                            <span class="h5" ng-bind="$ctrl.audio.name"></span>
+                            <i class="fa fa-times text-danger" ng-click="$ctrl.removeFile();" style="cursor: pointer;"></i>
+                        </div>
+                    </div>
+                    <div ng-if="$ctrl.type =='Insertar'">
+                        <audio controls id="art_audio" ngf-src="$ctrl.audio" style="width: 100%"></audio>
+                    </div>
+                    <div ng-if="$ctrl.type =='Actualizar'">
+                        <audio controls ngf-src="'http://localhost:8080/files/'+$ctrl.audio" style="width: 100%"></audio>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step title="Etiquetas" required-step-number="0" entered="stepEntered()">
+                <div class="container">
+                    <h4 class="text-center alert-secondary p-3">ETIQUETAS</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Ingrese palabras claves referentes al audio" ng-model="$ctrl.texto" style="text-transform:uppercase;" required>
+                        <div type="button" class="input-group-prepend" ng-click="$ctrl.getEtiquetaAdded()">
+                            <div class="input-group-text btn" id="btnGroupAddon">
+                                <i class="fa fa-plus"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12 mb-2 text-center" ng-repeat="selected in $ctrl.etiquetasSelected track by $index">
+                            <span class="badge badge-secondary p-2 text-dark" style="width: 80%;">
+                                <a href ng-click="$ctrl.dropEtiqueta($index);">
+                                    <i class="fa fa-times fa-lg text-danger"></i>
+                                </a>
+                                <strong ng-bind="selected.nombre | uppercase"></strong>
+                                <a href ng-if="!selected.existe" ng-click="$ctrl.form_etiqueta = true; $ctrl.etiqueta.contenido_es = selected.nombre;">
+                                    <label class="text-danger">(Debes crear esta etiqueta)</label>
+                                    <i class="fa fa-plus-circle fa-lg text-success"></i>
+                                </a>
+                                <a ng-if="selected.existe">
+                                    <label class="text-success">(Etiqueta agregada correctamente)</label>
+                                    <i class="fa fa-check fa-lg text-success"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step title="Artículo" required-step-number="1" entered="stepEntered()">
+                <div class="container">
+                    <h4 class="text-center alert-secondary p-3">ARTÍCULO</h4>
+                    <div class="row">
+                        <div class="col-lg-12 my-4">
+                            <div ng-if="$ctrl.type =='Insertar'">
+                                <audio controls ngf-src="$ctrl.audio" style="width: 100%"></audio>
+                            </div>
+                            <div ng-if="$ctrl.type =='Actualizar'">
+                                <audio controls ngf-src="'http://localhost:8080/files/'+$ctrl.audio" style="width: 100%"></audio>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="espanol">Español</label>
+                                <strong class="text-danger">*</strong>
+                                <textarea rows="3" name="espanol" class="form-control" placeholder="Ingrese artículo en español"
+                                    ng-model="$ctrl.articulo.espanol" ng-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="ingles">Inglés</label>
+                                <strong class="text-danger">*</strong>
+                                <textarea rows="3" name="ingles" class="form-control" placeholder="Ingrese artículo en inglés"
+                                    ng-model="$ctrl.articulo.ingles" ng-required="true"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="kreole">kreole</label>
+                                <strong class="text-danger">*</strong>
+                                <textarea rows="3" name="kreole" class="form-control" placeholder="Ingrese artículo en kreole"
+                                    ng-model="$ctrl.articulo.kreole" ng-required="true"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wizard-step>
+            <wizard-step title="Autor" required-step-number="2" entered="stepEntered()">
+                <div class="container">
+                    <h4 class="text-center alert-secondary p-3">AUTOR</h4>
+                    <input type="text" placeholder="Buscar autor" ng-model="$ctrl.autor_filter" class="form-control">
+                    <select class="form-control" ng-model="$ctrl.autor" ng-options="autor as autor.nombre for autor in $ctrl.autores | filter:{nombre:$ctrl.autor_filter} track by autor.id"
+                        required></select>
+                    <div class="text-center mt-3">
+                        <a href ng-click="$ctrl.form_autor = true;">
+                            ¿No está el autor que necesitas?
+                        </a>
+                    </div>
+                </div>
+            </wizard-step>
+        </wizard>
+        <div ng-show="$ctrl.form_etiqueta">
+            <div class="container" ng-init="$ctrl.getGramatica();">
+                <a href ng-click="$ctrl.form_etiqueta = false;">
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-long-arrow-alt-left fa-2x"></i>
+                    </span>
+                </a>
+            </div>
+            <div ng-if="$ctrl.loader">
+                <loader></loader>
+            </div>
+            <form-etiqueta type="Insertar" editar="true" etiqueta="$ctrl.etiqueta" callback="$ctrl.callback"></form-etiqueta>
+        </div>
+        <div ng-show="$ctrl.form_autor">
+            <div class="container">
+                <a href ng-click="$ctrl.form_autor = false;">
+                    <span class="badge badge-secondary">
+                        <i class="fa fa-long-arrow-alt-left fa-2x"></i>
+                    </span>
+                </a>
+            </div>
+            <div ng-if="$ctrl.loader">
+                <loader></loader>
+            </div>
+            <form-autor type="Insertar" editar="true" autor="$ctrl.autorToInsert" callback="$ctrl.callbackAutores"></form-autor>
+        </div>
+    </div>
+</div>

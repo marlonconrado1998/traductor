@@ -1,0 +1,24 @@
+<div class="modal-header">
+    <h5 class="text-center">Bienvenidos</h5>
+</div>
+<div class="modal-body bg-white">
+    <div class="container">
+        <img id="image" src="{{$ctrl.slides[$ctrl.pos].imagen}}" class="img-fluid">
+        <div class="mb-5">
+            <h5 ng-bind="$ctrl.slides[$ctrl.pos].titulo"></h5>
+            <p ng-bind="$ctrl.slides[$ctrl.pos].texto"></p>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button ng-if="$ctrl.pos != 0;" class="btn btn-danger" ng-click="$ctrl.atras();">
+                    Atrás
+                </button>
+            </div>
+            <div class="col text-center">
+                <button class="btn btn-success" ng-click="$ctrl.siguiente();">
+                    Siguiente
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
