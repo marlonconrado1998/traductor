@@ -1,8 +1,17 @@
-app.controller('inicioController', inicioController)
+app
+.filter('dateRange', dateRange)
+.controller('inicioController', inicioController)
 
-inicioController.$inject = ['audioService', '$uibModal', 'NgTableParams', 'TOASTER_SERVICE'];
 
-function inicioController(audioService, $uibModal, NgTableParams, TOASTER_SERVICE) {
+function dateRange () {
+    return function (range) {
+        // var date = new Date();
+        return false;
+    }
+}
+inicioController.$inject = ['audioService', '$uibModal', 'NgTableParams', 'TOASTER_SERVICE', '$stateParams', '$state', '$rootScope'];
+
+function inicioController(audioService, $uibModal, NgTableParams, TOASTER_SERVICE, $stateParams, $state, $rootScope) {
 
     var inicioCtrl = this;
     inicioCtrl.usuario = "marlonconrado1998@gmail.com";
@@ -20,7 +29,7 @@ function inicioController(audioService, $uibModal, NgTableParams, TOASTER_SERVIC
             inicioCtrl.articulos = resp.data;
             table();
         }).catch(function (error) {
-            TOASTER_SERVICE.error(error.error);
+            // TOASTER_SERVICE.error(error.error);
         });
     }
 

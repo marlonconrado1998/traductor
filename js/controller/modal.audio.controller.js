@@ -152,13 +152,15 @@ function ModalInstanceCtrl($uibModalInstance, Upload, TOASTER_SERVICE, GeneralUR
 
         }).catch(function (error) {});
     }
-
+    
     // Busca el autor insertado en la lista de autores y lo asigna al select de autores 
     function getAutor(idAutor) {
         for (var index in modalCtrl.autores) {
             var autor = modalCtrl.autores[index];
             if (autor.id == idAutor) {
                 modalCtrl.autor = angular.copy(autor);
+                modalCtrl.autor_filter = autor.nombre;
+                // console.log(modalCtrl.autor);
                 break;
             }
         }

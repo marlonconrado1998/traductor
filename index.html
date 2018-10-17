@@ -7,9 +7,11 @@
     <title>Raizal creole</title>
 
     <link rel="stylesheet" href="css/bootstrap.css">
+
     <link rel="stylesheet" href="vendors/iconfonts/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="vendors/css/vendor.bundle.addons.css">
+
     <link rel="shortcut icon" href="images/favicon.png" />
     <link rel="stylesheet" href="fonts/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/sweetalert2/dist/sweetalert2.min.css">
@@ -20,24 +22,25 @@
     <link rel="stylesheet" type="text/css" href="node_modules/ng-table/bundles/ng-table.min.css">
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- Own styles -->
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/upload_file.css">
+    <link rel="stylesheet" href="css/ng-table.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+
+    
 </head>
 
 <body>
-    <div class="container-scroller" ng-controller="loginController as lc">
-        <ng-include src="'partials/_navbar.html'"></ng-include>
-        <div class="container-fluid page-body-wrapper">
-            <ng-include src="'partials/_sidebar.html'"></ng-include>
-            <div class="main-panel">
-                <ui-view></ui-view>
-                <ng-include src="'partials/_footer.html'"></ng-include>
-            </div>
-        </div>
-    </div>
+
+    <ui-view></ui-view>
+
     <!-- Bower-->
     <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
     <script type="text/javascript" src="node_modules/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script>
+    <!-- <script type="text/javascript" src="bower_components/ng-img-crop/compile/minified/ng-img-crop.js"></script> -->
+    
     <script type="text/javascript" src="node_modules/popper.min.js"></script>
     <script type="text/javascript" src="node_modules/bootstrap.min.js"></script>
     <script type="text/javascript" src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
@@ -56,6 +59,7 @@
     <!-- Constant -->
     <script type="text/javascript" src="js/config/constant.js"></script>
     <!-- Controller -->
+    <script type="text/javascript" src="js/controller/home.controller.js"></script>
     <script type="text/javascript" src="js/controller/login.controller.js"></script>
     <script type="text/javascript" src="js/controller/autor.controller.js"></script>
     <script type="text/javascript" src="js/controller/audio.controller.js"></script>
@@ -80,11 +84,7 @@
     <script type="text/javascript" src="node_modules/ng-table/bundles/ng-table.js"></script>
     <!-- Canvas -->
     <script src="js/off-canvas.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#preloader-bg").fadeOut("slow");
-        })
-    </script>
+    <script src="js/misc.js"></script>
 </body>
 
 </html>

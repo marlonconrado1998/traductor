@@ -28,6 +28,10 @@ function audioService(generalService, $http, $q) {
     audioService.getGramatica = getGramatica;
     audioService.deleteImage = deleteImage;
 
+    // Auth
+    audioService.addUser = addUser;
+    audioService.getUser = getUser;
+
 
     // Manual inicial
     audioService.getManual = getManual;
@@ -48,7 +52,7 @@ function audioService(generalService, $http, $q) {
         return generalService.EJECUTAR_SERVICES("GET", "/files/" + id);
     }
 
-    function updateArticulo (articulo) {
+    function updateArticulo(articulo) {
         return generalService.EJECUTAR_SERVICES("PUT", "/articulo", articulo);
     }
 
@@ -97,5 +101,18 @@ function audioService(generalService, $http, $q) {
 
     function deleteImage(path, id) {
         return generalService.EJECUTAR_SERVICES("DELETE", "/image/" + path + "/" + id);
+    }
+
+    function getUser() {
+        return generalService.EJECUTAR_SERVICES("GET", "/autentication");
+    }
+
+    function addUser() {
+        var user = {
+            nombre: "Marlon",
+            apellido: "Conrado",
+            edad: 20
+        }
+        return generalService.EJECUTAR_SERVICES("POST", "/autentication", user);
     }
 }

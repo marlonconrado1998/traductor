@@ -1,5 +1,37 @@
-.active {
+.active_sidebar {
     font-weight: bold;
-    text-transform: uppercase;
-    background-color: #fafbfc;
+    background-color: #f2f8f9;
+}
+
+.sidebar-offcanvas.active {
+    left: 0;
+}
+
+.sidebar-offcanvas {
+    left: -260px;
+    /* box-shadow: 1px 1px 1px #80808059; */
+}
+.scroll-sidebar {
+    overflow-x: auto;
+    max-width: 120px;
+}
+/* width */
+.scroll-sidebar::-webkit-scrollbar {
+    width: 0.1px;
+    height: 4px;
+}
+
+/* Track */
+.scroll-sidebar::-webkit-scrollbar-track {
+    background: #f3eded;
+}
+
+/* Handle */
+.scroll-sidebar::-webkit-scrollbar-thumb {
+    background: linear-gradient(120deg, #00e4d0, #5983e8)
+}
+
+/* Handle on hover */
+.scroll-sidebar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(120deg, #00c8b8, #5481eb)
 }

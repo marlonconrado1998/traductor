@@ -1,10 +1,10 @@
 <div class="modal-header">
-    <h5 class="text-center">Bienvenidos</h5>
+    <h5 class="text-center">Bienvenido</h5>
 </div>
 <div class="modal-body bg-white">
     <div class="container">
-        <img id="image" src="{{$ctrl.slides[$ctrl.pos].imagen}}" class="img-fluid">
-        <div class="mb-5">
+        <img ng-src="{{$ctrl.slides[$ctrl.pos].imagen}}" class="img-fluid">
+        <div class="my-3">
             <h5 ng-bind="$ctrl.slides[$ctrl.pos].titulo"></h5>
             <p ng-bind="$ctrl.slides[$ctrl.pos].texto"></p>
         </div>

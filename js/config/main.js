@@ -7,21 +7,12 @@ var app = angular.module('app', [
     'chart.js',
     'toaster',
     'ngTable'
+    // 'oc.lazyLoad'
 ]);
 
-app.run(["$rootScope", "$location", "$window",
-    function ($rootScope, $location, $window) {
-        $rootScope.$on("$locationChangeStart",
-            function () {
-                // $window.location = 'https://cloudhosting.isysingenieria.co/testWebServices/authservice/';
-                // if (sessionStorage.getItem("user") == null || sessionStorage.getItem("user") == undefined) {
-                    // $location.path("/Etiqueta");
-                // } else {
-                //     if ($location.path() == "/Login") {
-                //         // window.history.back();
-                //         $location.path("/Inicio");
-                //     }
-                // }
-            });
-    }
-]);
+// app.run(["$rootScope", "$location", "$window", '$stateParams',
+//     function ($rootScope, $location, $window, $stateParams) {
+//         $rootScope.$on("$locationChangeStart",
+//             function () {});
+//     }
+// ]);

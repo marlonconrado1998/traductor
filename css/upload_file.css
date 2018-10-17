@@ -1,0 +1,4 @@
+.uploadArticle:hover {
+    color: rgba(0, 122, 252, 1);
+    cursor: pointer;    
+}

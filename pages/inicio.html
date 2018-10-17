@@ -1,0 +1,11 @@
+<toaster-container></toaster-container>
+<div class="container-scroller">
+    <ng-include src="'partials/_navbar.html'"></ng-include>
+    <div class="container-fluid page-body-wrapper">
+        <ng-include src="'partials/_sidebar.html'"></ng-include>
+        <div class="main-panel">
+            <ui-view></ui-view>
+            <ng-include src="'partials/_footer.html'"></ng-include>
+        </div>
+    </div>
+</div>

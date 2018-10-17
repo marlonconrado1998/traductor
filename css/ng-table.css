@@ -1,0 +1,11 @@
+.ng-table-counts {
+    float: right;
+}
+
+.ng-table-pager {
+    margin-top: 10px;
+}
+
+.active {
+    /* background-color: #c1c1c1; */
+}
