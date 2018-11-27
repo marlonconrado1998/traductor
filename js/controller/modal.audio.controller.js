@@ -11,7 +11,7 @@ function ModalInstanceCtrl($uibModalInstance, Upload, TOASTER_SERVICE, GeneralUR
     modalCtrl.etiqueta = {};
     modalCtrl.loader = false;
     modalCtrl.type = items.type;
-
+    
     // Quita una etiqueta seleccionada
     modalCtrl.dropEtiqueta = function (index) {
         modalCtrl.etiquetasSelected.splice(index, 1);

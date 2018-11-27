@@ -16,12 +16,6 @@ function homeController(GENERAL_DATA, audioService, $uibModal, loginService, $st
             backdrop: true,
             controllerAs: '$ctrl'
         })
-        
-        // .result.then(function () {}, function (resp) {
-        //     if (resp === true && loginService.getLogged()) {
-        //         $location.path('/Audio');
-        //     }
-        // });
     }
 
     homeCtrl.toogleSidebar = function () {

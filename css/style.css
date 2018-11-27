@@ -22945,3 +22945,11 @@ dir {
 .switch+.switch {
   margin-left: 1rem;
 }
+
+.img-profile {
+box-shadow: 0 0 6px 1px #0000004a;
+}
+
+.content-wrapper {
+  padding: 1rem 1rem;
+}

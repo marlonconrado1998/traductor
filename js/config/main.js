@@ -7,12 +7,4 @@ var app = angular.module('app', [
     'chart.js',
     'toaster',
     'ngTable'
-    // 'oc.lazyLoad'
 ]);
-
-// app.run(["$rootScope", "$location", "$window", '$stateParams',
-//     function ($rootScope, $location, $window, $stateParams) {
-//         $rootScope.$on("$locationChangeStart",
-//             function () {});
-//     }
-// ]);

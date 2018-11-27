@@ -6,7 +6,8 @@
   "dependencies": {
     "bootstrap": "4.0.0",
     "font-awesome": "4.7.0",
-    "ng-table": ""
+    "ng-table": "^3.0.1",
+    "ui-bootstrap4": "^3.0.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

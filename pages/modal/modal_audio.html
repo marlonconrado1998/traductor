@@ -8,6 +8,7 @@
 </div>
 <div class="modal-body bg-white">
     <div class="container">
+
         <div ng-if="$ctrl.loader == true;">
             <loader></loader>
         </div>
@@ -45,7 +46,8 @@
                 <div class="container">
                     <h4 class="text-center alert-secondary p-3">ETIQUETAS</h4>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Ingrese palabras claves referentes al audio" ng-model="$ctrl.texto" style="text-transform:uppercase;" required>
+                        <input type="text" class="form-control" placeholder="Ingrese palabras claves referentes al audio separadas por coma"
+                            ng-model="$ctrl.texto" required>
                         <div type="button" class="input-group-prepend" ng-click="$ctrl.getEtiquetaAdded()">
                             <div class="input-group-text btn" id="btnGroupAddon">
                                 <i class="fa fa-plus"></i>
@@ -112,16 +114,26 @@
                 </div>
             </wizard-step>
             <wizard-step title="Autor" required-step-number="2" entered="stepEntered()">
-                <div class="container">
+                <div class="container text-center">
                     <h4 class="text-center alert-secondary p-3">AUTOR</h4>
-                    <input type="text" placeholder="Buscar autor" ng-model="$ctrl.autor_filter" class="form-control">
-                    <select class="form-control" ng-model="$ctrl.autor" ng-options="autor as autor.nombre for autor in $ctrl.autores | filter:{nombre:$ctrl.autor_filter} track by autor.id"
-                        required></select>
-                    <div class="text-center mt-3">
-                        <a href ng-click="$ctrl.form_autor = true;">
-                            ¿No está el autor que necesitas?
-                        </a>
+                    <div class="btn-group mb-2" style="width: 100%;" uib-dropdown>
+                        <input type="text" class="form-control" ng-model="$ctrl.autor.nombre" placeholder="Nombre de autor"
+                            ng-disabled="true" ng-click="$ctrl.audisabled = false;" required>
+                        <button id="split-button" type="button" class="btn btn-primary" uib-dropdown-toggle></button>
+                        <div class="dropdown-menu p-2" style="max-height: 200px; overflow-y: auto;" uib-dropdown-menu
+                            role="menu" aria-labelledby="split-button">
+                            <input type="text" class="form-control" ng-model="$ctrl.filterautor" placeholder="Buscar autor"
+                                ng-click="$ctrl.audisabled = false;" uib-dropdown-toggle>
+                            <div ng-repeat="autor in $ctrl.autores | filter:$ctrl.filterautor">
+                                <a href class="dropdown-item" ng-click="$ctrl.autor = autor; $ctrl.audisabled = true;">
+                                    <span ng-bind="autor.nombre"></span> |
+                                    <small class="text-primary" ng-bind="autor.id"></small>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+                    <a href class="text-center" ng-click="$ctrl.form_autor = true;">¿No existe el autor que buscas?</a>
+
                 </div>
             </wizard-step>
         </wizard>

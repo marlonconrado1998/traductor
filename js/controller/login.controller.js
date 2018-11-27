@@ -8,7 +8,6 @@ function loginController($stateParams, $location) {
     var loginCtrl = this;
     loginCtrl.userInfo = {};
 
-    // console.log($stateParams)
     loginCtrl.login = function () {
 
         var data = $stateParams.data,
@@ -22,7 +21,6 @@ function loginController($stateParams, $location) {
         if (session.data) return false; // Valida que no haya session usuario creada
         if (session.token) return false; // Valida que no haya session de token creada
 
-        loginCtrl.userInfo = data;
         sessionStorage.setItem('data', data);
         sessionStorage.setItem('token', token);
         $location.path('/inicio/audio');

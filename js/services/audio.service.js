@@ -13,6 +13,7 @@ function audioService(generalService, $http, $q) {
     audioService.removeFile = removeFile;
     audioService.getAudio = getAudio;
     audioService.updateArticulo = updateArticulo;
+    audioService.articulosByDate = articulosByDate;
 
 
     // Servicios Autor
@@ -36,6 +37,11 @@ function audioService(generalService, $http, $q) {
     // Manual inicial
     audioService.getManual = getManual;
 
+    // Etiquetas solicitadas
+    audioService.getEtiquetasSol = getEtiquetasSol;
+    audioService.deleteEtiquetaSol = deleteEtiquetaSol;
+
+
     function buscarArticulos(usuario) {
         return generalService.EJECUTAR_SERVICES("GET", "/articulos/" + usuario);
     }
@@ -54,6 +60,10 @@ function audioService(generalService, $http, $q) {
 
     function updateArticulo(articulo) {
         return generalService.EJECUTAR_SERVICES("PUT", "/articulo", articulo);
+    }
+
+    function articulosByDate (range) {
+        return generalService.EJECUTAR_SERVICES("POST", "/articulos_by_date", range);
     }
 
     function buscarAutores() {
@@ -114,5 +124,13 @@ function audioService(generalService, $http, $q) {
             edad: 20
         }
         return generalService.EJECUTAR_SERVICES("POST", "/autentication", user);
+    }
+
+    function getEtiquetasSol () {
+        return generalService.EJECUTAR_SERVICES("GET", "/etiquetas_solicitadas");
+    }
+    
+    function deleteEtiquetaSol (idsolicitud_sol) {
+        return generalService.EJECUTAR_SERVICES("DELETE", `/etiqueta_solicitada/${idsolicitud_sol}`);
     }
 }

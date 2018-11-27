@@ -2,10 +2,17 @@
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
-                <div class="card-body" style="height: 80vh;">
-                    <button class="btn btn-success mb-4" ng-click="inicioCtrl.modalAddArticulo('Insertar', null);">
-                        Agregar artículo
-                    </button>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-success mb-4" ng-click="inicioCtrl.modalAddArticulo('Insertar', null);">
+                                Agregar artículo
+                            </button>
+                        </div>
+                        <div class="col">
+                            <select class="form-control" ng-model="inicioCtrl.rangoQuery" ng-options="range.name for range in inicioCtrl.rangodate" ng-change="inicioCtrl.filterRange();"></select>
+                        </div>
+                    </div>
                     <div style="overflow-x: auto;">
                         <table ng-table="inicioCtrl.tableParams" class="table table-condensed table-bordered table-striped">
                             <tr ng-repeat="row in $data" class="t-hover pointer">

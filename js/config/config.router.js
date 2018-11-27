@@ -2,13 +2,9 @@ app.config(["$stateProvider", '$compileProvider', '$urlRouterProvider',
     function ($stateProvider, $compileProvider, $urlRouterProvider) {
 
         $compileProvider.debugInfoEnabled(false);
-        $urlRouterProvider.otherwise("/_404");
+        $urlRouterProvider.otherwise("/inicio/audio");
 
         $stateProvider
-            .state('_404', {
-                url: "/_404",
-                templateUrl: "pages/samples/error-404.html"
-            })
             .state('login', {
                 url: "/login?data&token",
                 templateUrl: 'pages/samples/login.html',
@@ -18,15 +14,15 @@ app.config(["$stateProvider", '$compileProvider', '$urlRouterProvider',
                     if (sessionStorage.getItem('data')) {
                         $state.go($state.current.name, null);
                     }
-                },
-                // resolve: resolve
+                }
             })
             .state('inicio', {
                 url: "/inicio",
                 templateUrl: "pages/inicio.html",
                 controller: "homeController",
                 controllerAs: "homeCtrl",
-                onEnter: checkLogged
+                onEnter: checkLogged,
+                abstract: true
             })
             .state('inicio.audio', {
                 url: '/audio',
@@ -43,21 +39,17 @@ app.config(["$stateProvider", '$compileProvider', '$urlRouterProvider',
                 templateUrl: 'pages/etiqueta.html',
                 controller: "etiquetaController",
                 controllerAs: "etiquetaCtrl",
+            }).state('inicio.etiquetas_solicitadas', {
+                url: '/etiquetas_solicitadas',
+                templateUrl: 'pages/etiquetas_sol.html',
+                controller: "etiquetaSolController",
+                controllerAs: "etiquetaSolCtrl",
             })
 
         function checkLogged($state) {
-            // var logged = false;
             if (!sessionStorage.getItem('data')) {
                 $state.go($state.current.name, null);
                 location.href = "https://cloudhosting.isysingenieria.co/testWebServices/authservice/";
-            }
-        }
-
-        function resolve(toLoad) {
-            return {
-                load: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    return $ocLazyLoad.load(toLoad)
-                }]
             }
         }
     }
