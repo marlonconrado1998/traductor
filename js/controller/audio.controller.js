@@ -77,12 +77,12 @@ function inicioController(audioService, $uibModal, NgTableParams, TOASTER_SERVIC
                 }
             }
         });
-        // modalInstance.result.then(function () {}, function (articulo) {
-        //     if (articulo) {
-        //         inicioCtrl.getAutores();
-        //         inicioCtrl.buscarArticulos();
-        //     };
-        // });
+        modalInstance.result.then(function () {}, function (articulo) {
+            if (articulo) {
+                inicioCtrl.getAutores();
+                inicioCtrl.buscarArticulos();
+            };
+        });
     }
 
     inicioCtrl.getAutor = function (id_autor) {

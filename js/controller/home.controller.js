@@ -1,9 +1,9 @@
 app.controller('homeController', homeController)
 
 /** @ngInject */
-homeController.$inject = ['GENERAL_DATA', 'audioService', '$uibModal', 'loginService', '$stateParams', '$log'];
+homeController.$inject = ['GENERAL_DATA', 'audioService', '$uibModal', 'Login', '$stateParams', '$log'];
 
-function homeController(GENERAL_DATA, audioService, $uibModal, loginService, $stateParams, $log) {
+function homeController(GENERAL_DATA, audioService, $uibModal, Login, $stateParams, $log) {
 
     var homeCtrl = this;
     homeCtrl.infoUser = JSON.parse(sessionStorage.getItem('data'));
@@ -20,6 +20,12 @@ function homeController(GENERAL_DATA, audioService, $uibModal, loginService, $st
 
     homeCtrl.toogleSidebar = function () {
         $('.sidebar-offcanvas').toggleClass('active')
+    }
+
+    homeCtrl.logout = function () {
+        sessionStorage.removeItem('data');
+        sessionStorage.removeItem('token');
+        location.href = Login;
     }
 
     homeCtrl.getGramatica = function () {
