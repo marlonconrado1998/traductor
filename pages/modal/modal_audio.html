@@ -38,7 +38,7 @@
                         <audio controls id="art_audio" ngf-src="$ctrl.audio" style="width: 100%"></audio>
                     </div>
                     <div ng-if="$ctrl.type =='Actualizar'">
-                        <audio controls ngf-src="'http://localhost:8080/files/'+$ctrl.audio" style="width: 100%"></audio>
+                        <audio controls ngf-src="$ctrl.URI+'/files/'+$ctrl.audio" style="width: 100%"></audio>
                     </div>
                 </div>
             </wizard-step>
@@ -83,7 +83,7 @@
                                 <audio controls ngf-src="$ctrl.audio" style="width: 100%"></audio>
                             </div>
                             <div ng-if="$ctrl.type =='Actualizar'">
-                                <audio controls ngf-src="'http://localhost:8080/files/'+$ctrl.audio" style="width: 100%"></audio>
+                                <audio controls ngf-src="$ctrl.URI+'/files/'+$ctrl.audio" style="width: 100%"></audio>
                             </div>
                         </div>
                         <div class="col-lg-12">

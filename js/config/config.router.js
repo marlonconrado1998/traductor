@@ -1,5 +1,5 @@
-app.config(["$stateProvider", '$compileProvider', '$urlRouterProvider',
-    function ($stateProvider, $compileProvider, $urlRouterProvider) {
+app.config(["$stateProvider", '$compileProvider', '$urlRouterProvider', 'Login', 
+    function ($stateProvider, $compileProvider, $urlRouterProvider, Login) {
 
         $compileProvider.debugInfoEnabled(false);
         $urlRouterProvider.otherwise("/inicio/audio");
@@ -49,7 +49,7 @@ app.config(["$stateProvider", '$compileProvider', '$urlRouterProvider',
         function checkLogged($state) {
             if (!sessionStorage.getItem('data')) {
                 $state.go($state.current.name, null);
-                location.href = "https://cloudhosting.isysingenieria.co/testWebServices/authservice/";
+                location.href = Login;
             }
         }
     }
